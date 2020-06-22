@@ -1,10 +1,13 @@
 import React from 'react';
+import { Router } from '@reach/router';
+import Home from './pages/Home';
+import './App.less';
 
 function App() {
   return (
-    <div>
-      <p>Hello</p>
-    </div>
+    <Router>
+      <Home path="/" />
+    </Router>
   );
 }
 
