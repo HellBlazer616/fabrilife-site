@@ -1,29 +1,34 @@
 import React, { useState } from 'react';
-import { Menu, Button, Tooltip, Badge, Avatar, Drawer } from 'antd';
+import { Menu, Button, Badge } from 'antd';
+import { Link } from '@reach/router';
 import {
   AppstoreOutlined,
   SearchOutlined,
   UserOutlined,
   ShoppingCartOutlined,
   DownOutlined,
+  ShoppingTwoTone,
 } from '@ant-design/icons';
 import styled from '@emotion/styled';
 import SearchComponent from './SearchComponent';
+import CartDrawerComponent from './CartDrawerComponent';
 import useWindowDimensions from '../utils/hooks/useWindowDimensions';
+import color from '../utils/colors';
 
 const { SubMenu } = Menu;
 
 const NavComponent = () => {
   const [currentMenu, setCurrentMenu] = useState('brand');
   const [isSearchDrawerVisible, setIsSearchDrawerVisible] = useState(false);
+  const [isCartDrawerVisible, setIsCartDrawerVisible] = useState(false);
   const { width: windowWidth } = useWindowDimensions();
 
   const handleMenuClick = (e) => {
     setCurrentMenu(e.key);
   };
 
-  const showCart = (e) => {
-    console.log(e);
+  const showCart = () => {
+    setIsCartDrawerVisible(!isCartDrawerVisible);
   };
 
   const openSearchDrawer = () => {
@@ -55,7 +60,7 @@ const NavComponent = () => {
           }
         >
           <Menu.Item key="login" title="Login">
-            Login
+            <Link to="/login">Login</Link>
           </Menu.Item>
         </SubMenu>
         <Menu.Item
@@ -77,20 +82,21 @@ const NavComponent = () => {
         <Menu.Item key="mail" icon={<AppstoreOutlined />}>
           Create
         </Menu.Item>
-        <Menu.Item key="app" icon={<AppstoreOutlined />}>
-          Shop
-        </Menu.Item>
-
-        {/* <SubMenu icon={<SettingOutlined />} title="Navigation Three - Submenu">
-          <Menu.ItemGroup title="Item 1">
-            <Menu.Item key="setting:1">Option 1</Menu.Item>
-            <Menu.Item key="setting:2">Option 2</Menu.Item>
-          </Menu.ItemGroup>
-          <Menu.ItemGroup title="Item 2">
-            <Menu.Item key="setting:3">Option 3</Menu.Item>
-            <Menu.Item key="setting:4">Option 4</Menu.Item>
-          </Menu.ItemGroup>
-        </SubMenu> */}
+        <SubMenu
+          key="shop"
+          title="Shop"
+          icon={
+            <ShoppingTwoTone
+              twoToneColor={color.primary}
+              style={{ fontSize: 18 }}
+            />
+          }
+        >
+          <Menu.Item key="men">Mens's T-Shirt</Menu.Item>
+          <Menu.Item key="Women">Women's T-Shirt</Menu.Item>
+          <Menu.Item key="kid">Kids's T-Shirt</Menu.Item>
+          <Menu.Item key="event">Event T-Shirt</Menu.Item>
+        </SubMenu>
       </StyledMenu>
       <SearchComponent
         openSearchDrawer={openSearchDrawer}
@@ -107,21 +113,25 @@ const NavComponent = () => {
         tabIndex={0}
       >
         <Badge count={0} showZero>
-          <Tooltip title="open cart">
-            <Button
-              type="primary"
-              shape="circle"
-              icon={
-                <ShoppingCartOutlined
-                  style={{ fontSize: '25px', margin: 'auto' }}
-                />
-              }
-              size="large"
-              block
-            />
-          </Tooltip>
+          {/* <Tooltip title="open cart"> */}
+          <Button
+            type="primary"
+            shape="circle"
+            icon={
+              <ShoppingCartOutlined
+                style={{ fontSize: '25px', margin: 'auto' }}
+              />
+            }
+            size="large"
+            block
+          />
+          {/* </Tooltip> */}
         </Badge>
       </CartButton>
+      <CartDrawerComponent
+        isCartDrawerVisible={isCartDrawerVisible}
+        openCartDrawer={showCart}
+      />
     </header>
   );
 };
@@ -134,6 +144,7 @@ const StyledMenu = styled(Menu)`
   top: 0;
   z-index: 1;
   width: 100%;
+  border: 1px solid #f4f1f0;
 
   & .search__button {
     float: right;

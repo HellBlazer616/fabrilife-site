@@ -4,8 +4,9 @@ const turquoise = '#00adb5';
 const lightBlack = '#393e46';
 const error = '#e43f5a';
 const red = '#ff2e63';
+const lightRed = '#ffafaf';
 const lightSky = '#ddf3f5';
-export { black, grey, turquoise, lightBlack, error, red, lightSky };
+export { black, grey, turquoise, lightBlack, error, red, lightSky, lightRed };
 
 const colors = {
   primary: '#009E7F',
