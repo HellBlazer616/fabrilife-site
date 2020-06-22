@@ -1,5 +1,5 @@
 import React from 'react';
-import { Drawer } from 'antd';
+import { Drawer, Empty } from 'antd';
 
 import useWindowDimension from '../utils/hooks/useWindowDimensions';
 
@@ -12,10 +12,15 @@ const CartDrawerComponent = ({ openCartDrawer, isCartDrawerVisible }) => {
       onClose={openCartDrawer}
       visible={isCartDrawerVisible}
       key="cartDrawer"
-      width={windowWidth < 800 ? windowWidth - 100 : 650}
+      width={windowWidth < 800 ? windowWidth - 10 : 650}
       closable
       // bodyStyle={width < 800 ? w'100vw' : 650}
-    />
+    >
+      <Empty
+        description={<h3>Your cart is empty</h3>}
+        style={{ marginTop: '50%' }}
+      />
+    </Drawer>
   );
 };
 

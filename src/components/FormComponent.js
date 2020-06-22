@@ -1,6 +1,6 @@
 import styled from '@emotion/styled';
 
-import { black, grey, lightRed, error } from '../utils/colors';
+import colors, { black, grey, lightRed, error } from '../utils/colors';
 
 const Log = styled.div`
   display: flex;
@@ -28,7 +28,7 @@ const Log = styled.div`
     }
     & .link {
       text-decoration: none;
-      color: ${lightRed};
+      color: ${colors.primary300};
     }
     & .error {
       color: ${error};

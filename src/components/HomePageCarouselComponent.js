@@ -40,7 +40,7 @@ const HomePageCarousel = () => {
         infinite
         autoPlaySpeed={5000}
         keyBoardControl
-        customTransition="all .5"
+        customTransition="transform 1s cubic-bezier(0.025, 0.45, 0.45, 0.95)"
         transitionDuration={500}
         containerClass="carousel-container"
         removeArrowOnDeviceType={['tablet', 'mobile', 'desktop']}
